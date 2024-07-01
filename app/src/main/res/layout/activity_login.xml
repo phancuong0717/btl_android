@@ -56,6 +56,31 @@
         android:padding="16dp"
         android:text="Login"
         android:textColor="#FFFFFF" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:text="Do not have an account?"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
+            android:text="Resgister now"/>
+    </LinearLayout>
+
+
     <ProgressBar
         android:id="@+id/customProgressBar"
         android:layout_width="match_parent"
