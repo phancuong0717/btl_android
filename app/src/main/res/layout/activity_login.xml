@@ -56,6 +56,13 @@
         android:padding="16dp"
         android:text="Login"
         android:textColor="#FFFFFF" />
+    <ProgressBar
+        android:id="@+id/customProgressBar"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="60dp"
+        android:layout_margin="12dp"
+        android:indeterminate="true"/>
 
     <TextView
         android:id="@+id/tvAssistance"
