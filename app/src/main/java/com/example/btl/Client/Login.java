@@ -40,6 +40,10 @@ public class Login extends AppCompatActivity {
         progressBar = findViewById(R.id.customProgressBar);
         mAuth = FirebaseAuth.getInstance();
         btnLogin= findViewById(R.id.btnLogin);
+        String Stremail= getIntent().getStringExtra("email");
+        if (Stremail != null) {
+            email.setText(Stremail);
+        }
         btnLogin.setOnClickListener(v -> {
             String emailStr = email.getText().toString();
             String passwordStr = password.getText().toString();
