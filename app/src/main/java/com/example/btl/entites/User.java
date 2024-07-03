@@ -1,6 +1,7 @@
 package com.example.btl.entites;
 
 public class User {
+    String name;
     String userID;
     String email;
     String password;
@@ -11,13 +12,21 @@ public class User {
     public User() {
     }
 
-    public User(String userID, String email, String password, String avatar, String role, Boolean status) {
+    public User(String userID, String email, String password, String avatar, String role, Boolean status, String name) {
         this.userID = userID;
         this.email = email;
         this.password = password;
         this.avatar = avatar;
         this.role = role;
         this.status = true;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUserID() {

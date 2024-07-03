@@ -77,7 +77,7 @@ public class Resgister extends AppCompatActivity {
                         Toast.makeText(Resgister.this, "Register success", Toast.LENGTH_SHORT).show();
                         FirebaseUser firebaseUser = mAuth.getCurrentUser();
                         String UID = firebaseUser.getUid();
-                        User user = new User(UID,  email, password,"","USER", true);
+                        User user = new User(UID,  email, password,"","USER", true,username);
 //                        databaseReference= FirebaseDatabase.getInstance().getReference("Users").child(UID);
                         db.collection("Users").document(UID).set(user)
                                 .addOnSuccessListener(a-> {
