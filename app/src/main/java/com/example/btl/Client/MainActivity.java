@@ -1,36 +1,19 @@
 package com.example.btl.Client;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.btl.Fragments.Home;
-import com.example.btl.Fragments.Notification;
 import com.example.btl.Fragments.Posted;
 import com.example.btl.Fragments.Profile;
+import com.example.btl.Fragments.Restaurant;
 import com.example.btl.R;
 import com.example.btl.databinding.ActivityMainBinding;
-import com.example.btl.entites.Category;
-import com.example.btl.entites.Comment;
-import com.example.btl.entites.Post;
-import com.example.btl.entites.Product;
-import com.example.btl.entites.Restaurant;
-import com.example.btl.entites.RestaurantCategory;
-import com.example.btl.entites.User;
-import com.example.btl.entites.Vote;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.home:
                     replaceFragment(new Home());
                     break;
-                case R.id.notify:
-                    replaceFragment(new Notification());
+                case R.id.restaurant:
+                    replaceFragment(new Restaurant());
                     break;
                 case R.id.post:
                     replaceFragment(new Posted());
