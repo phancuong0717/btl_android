@@ -48,4 +48,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 }
