@@ -54,6 +54,6 @@ public class Profile extends Fragment {
             binding.name.setText(user.getDisplayName());
         }
         binding.email.setText(user.getEmail());
-        Glide.with(this).load(avatar).error(R.drawable.profile_picture).into(binding.profileImage);
+        Glide.with(this).load(avatar).error(R.drawable.no_avatar).into(binding.profileImage);
     }
 }

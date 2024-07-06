@@ -13,13 +13,13 @@
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
+        <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
         android:layout_width="233dp"
         android:layout_height="233dp"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/profile_picture"
+        android:src="@drawable/no_avatar"
         android:contentDescription="avatar" />
 
     <TextView
