@@ -1,5 +1,6 @@
 package com.example.btl.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,11 +34,26 @@ public class Profile extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         showInfo();
         binding.logoutButton.setOnClickListener(v -> {
-            mAuth.signOut();
-            Intent intent = new Intent(getActivity(), Login.class);
-            startActivity(intent);
-            getActivity().finish();
-            Toast.makeText(getActivity(), "Sign out successfully", Toast.LENGTH_SHORT).show();
+//            mAuth.signOut();
+//            Intent intent = new Intent(getActivity(), Login.class);
+//            startActivity(intent);
+//            getActivity().finish();
+//            Toast.makeText(getActivity(), "Sign out successfully", Toast.LENGTH_SHORT).show();
+            new AlertDialog.Builder(getActivity())
+                    .setTitle("Confirm Sign Out")
+                    .setMessage("Are you sure you want to sign out?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        mAuth.signOut();
+                        Intent intent = new Intent(getActivity(), Login.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                        Toast.makeText(getActivity(), "Sign out successfully", Toast.LENGTH_SHORT).show();
+                    })
+                    .setNegativeButton("No", (dialog, which) -> {
+                        // User cancelled the dialog
+                        dialog.dismiss();
+                    })
+                    .show();
         });
         return binding.getRoot();
     }
