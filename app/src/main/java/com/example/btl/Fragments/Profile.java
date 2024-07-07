@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.btl.Client.Login;
+import com.example.btl.Client.UpdateUser;
 import com.example.btl.R;
 import com.example.btl.databinding.FragmentProfileBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,19 +29,28 @@ public class Profile extends Fragment {
 
     private FragmentProfileBinding binding;
     private FirebaseAuth mAuth;
+    private final ActivityResultLauncher<Intent> launcher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == UpdateUser.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null && data.getBooleanExtra("isUpdated", false)) {
+                        showInfo();
+                    }
+                }
+            });
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         mAuth = FirebaseAuth.getInstance();
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         showInfo();
+        binding.editButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), UpdateUser.class);
+            launcher.launch(intent);
+        });
         binding.logoutButton.setOnClickListener(v -> {
-//            mAuth.signOut();
-//            Intent intent = new Intent(getActivity(), Login.class);
-//            startActivity(intent);
-//            getActivity().finish();
-//            Toast.makeText(getActivity(), "Sign out successfully", Toast.LENGTH_SHORT).show();
             new AlertDialog.Builder(getActivity())
                     .setTitle("Confirm Sign Out")
                     .setMessage("Are you sure you want to sign out?")
@@ -50,7 +62,6 @@ public class Profile extends Fragment {
                         Toast.makeText(getActivity(), "Sign out successfully", Toast.LENGTH_SHORT).show();
                     })
                     .setNegativeButton("No", (dialog, which) -> {
-                        // User cancelled the dialog
                         dialog.dismiss();
                     })
                     .show();
@@ -58,12 +69,13 @@ public class Profile extends Fragment {
         return binding.getRoot();
     }
 
-    private void showInfo() {
+    public void showInfo() {
         FirebaseUser user = mAuth.getCurrentUser();
-        Uri avatar = user.getPhotoUrl();
+
         if (user == null) {
             return;
         }
+        Uri avatar = user.getPhotoUrl();
         if (user.getDisplayName() == null) {
             binding.name.setVisibility(View.GONE);
         } else {
