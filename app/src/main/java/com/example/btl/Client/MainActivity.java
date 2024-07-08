@@ -1,6 +1,9 @@
 package com.example.btl.Client;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +17,7 @@ import com.example.btl.Fragments.Profile;
 import com.example.btl.Fragments.Restaurant;
 import com.example.btl.R;
 import com.example.btl.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
@@ -52,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Post.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
