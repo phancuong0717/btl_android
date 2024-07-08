@@ -101,6 +101,9 @@ public class Resgister extends AppCompatActivity {
 
 
     }
+
+
+
     private void showLoading(boolean b){
         if(b){
             loading.setVisibility(View.VISIBLE);
