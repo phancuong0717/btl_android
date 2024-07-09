@@ -19,7 +19,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private Map<String, String> userNamesMap;
     private Map<String, String> userAvatarsMap;
 
-    public PostAdapter(List<PostEntity> posts, Map<String, String> userNamesMap, Map<String, String> userAvatarsMap) {
+
+    public PostAdapter(List<PostEntity> posts,Map<String, String> userNamesMap, Map<String, String> userAvatarsMap) {
+
         this.posts = posts;
         this.userNamesMap = userNamesMap;
         this.userAvatarsMap = userAvatarsMap;

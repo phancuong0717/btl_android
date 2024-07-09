@@ -12,14 +12,16 @@ public class User {
     public User() {
     }
 
-    public User(String userID, String email, String password, String avatar, String role, Boolean status, String name) {
+    public User(String userID, String email, String password, String avatar, String role, String name) {
         this.userID = userID;
         this.email = email;
         this.password = password;
         this.avatar = avatar;
         this.role = role;
         this.status = true;
-        this.name = name;
+
+        this.name=name;
+
     }
 
     public String getName() {
