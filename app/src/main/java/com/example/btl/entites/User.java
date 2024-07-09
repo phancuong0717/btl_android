@@ -19,6 +19,7 @@ public class User {
         this.avatar = avatar;
         this.role = role;
         this.status = true;
+        this.name = name;
     }
 
     public String getName() {
