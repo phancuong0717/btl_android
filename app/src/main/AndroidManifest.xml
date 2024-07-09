@@ -22,7 +22,7 @@
             android:name=".Client.ChangePassword"
             android:exported="false" />
         <activity
-            android:name=".Client.Resgister
+            android:name=".Client.Resgister"
             android:exported="false" />
         <activity
             android:name=".Client.MainActivity"
