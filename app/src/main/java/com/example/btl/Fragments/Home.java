@@ -3,64 +3,87 @@ package com.example.btl.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.btl.Adapters.PostAdapter;
 import com.example.btl.R;
+import com.example.btl.databinding.FragmentHomeBinding;
+import com.example.btl.entites.PostEntity;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Home#newInstance} factory method to
- * create an instance of this fragment.
  */
 public class Home extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Home() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Home.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Home newInstance(String param1, String param2) {
-        Home fragment = new Home();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private FragmentHomeBinding binding;
+    private View view;
+    private PostAdapter adapter;
+    private FirebaseFirestore db;
+    private List<PostEntity> postList;
+    private Map<String, String> userNamesMap;
+    private Map<String, String> userAvatarsMap;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        view = binding.getRoot();
+        db = FirebaseFirestore.getInstance();
+        RecyclerView recyclerView = binding.rcvListPost;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(view.getContext(), layoutManager.getOrientation());
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        adapter = new PostAdapter(new ArrayList<>(),new HashMap<>(), new HashMap<>());
+        recyclerView.setAdapter(adapter);
+        db = FirebaseFirestore.getInstance();
+        postList = new ArrayList<>();
+        userNamesMap = new HashMap<>();
+        userAvatarsMap = new HashMap<>();
+        loadPosts();
+        return view;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    private void loadPosts() {
+        db.collection("posts")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            PostEntity post = document.toObject(PostEntity.class);
+                            postList.add(post);
+                            getUserName(post.getUserId());
+                        }
+
+                    } else {
+
+                    }
+                });
+    }
+
+    private void getUserName(String userId) {
+        db.collection("Users").document(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                String userName = task.getResult().getString("name");
+                String userAvatar = task.getResult().getString("avatar");
+                userNamesMap.put(userId, userName);
+                userAvatarsMap.put(userId, userAvatar);
+                adapter.updateUserNamesMap(userNamesMap);
+                adapter.updateUserAvatarsMap(userAvatarsMap);
+                adapter.updatePostList(postList);
+            } else {
+            }
+        });
     }
 }
