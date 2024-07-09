@@ -35,6 +35,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 
@@ -129,6 +131,9 @@ public class UpdateUser extends AppCompatActivity {
                             resultIntent.putExtra("isUpdated", true);
                             setResult(RESULT_OK, resultIntent);
                             binding.progressBar.setVisibility(View.GONE);
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            DocumentReference userRef = db.collection("Users").document(user.getUid());
+                            userRef.update("avatar", uri.toString());
                             Toast.makeText(UpdateUser.this, "Update success", Toast.LENGTH_SHORT).show();
                             finish();
                         }

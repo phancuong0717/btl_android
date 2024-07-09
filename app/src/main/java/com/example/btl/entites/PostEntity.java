@@ -1,17 +1,23 @@
 package com.example.btl.entites;
 
-public class Post {
+import android.os.Build;
+
+import java.time.LocalDate;
+
+public class PostEntity {
     String id;
     String title;
     String content;
     String userId;
     String restaurant_id;
+
     String image;
     String created_at;
     String updated_at;
     Boolean status;
+    String product_id;
 
-    public Post(String id, String title, String content, String userId, String restaurant_id, String image, String created_at, String updated_at, Boolean status) {
+    public PostEntity(String id, String title, String content, String userId, String restaurant_id, String image, Boolean status, String product_id, String created_at, String updated_at) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -20,10 +26,20 @@ public class Post {
         this.image = image;
         this.created_at = created_at;
         this.updated_at = updated_at;
+
         this.status = status;
+        this.product_id= product_id;
     }
 
-    public Post() {
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
+    }
+
+    public PostEntity() {
     }
 
     public String getId() {
@@ -97,4 +113,6 @@ public class Post {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+
+
 }
