@@ -76,7 +76,9 @@ public class Post extends AppCompatActivity {
         String image = uri.toString();
         String id = db.collection("posts").document().getId();
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        PostEntity post = new PostEntity(id, title, content, userId, restaurantName, image,  true, "","","");
+
+        PostEntity post = new PostEntity(id, title, content, userId, restaurantName, image,   "","",true);
+
 
         db.collection("posts").document(id).set(post)
                 .addOnSuccessListener(aVoid -> Toast.makeText(this, "Post added", Toast.LENGTH_SHORT).show())

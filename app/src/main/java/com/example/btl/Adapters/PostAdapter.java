@@ -2,12 +2,15 @@ package com.example.btl.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.btl.R;
 import com.example.btl.databinding.ItemPostBinding;
 import com.example.btl.entites.PostEntity;
+
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +19,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     private Map<String, String> userNamesMap;
     private Map<String, String> userAvatarsMap;
 
+
     public PostAdapter(List<PostEntity> posts,Map<String, String> userNamesMap, Map<String, String> userAvatarsMap) {
+
         this.posts = posts;
         this.userNamesMap = userNamesMap;
         this.userAvatarsMap = userAvatarsMap;

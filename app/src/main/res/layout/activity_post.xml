@@ -93,9 +93,27 @@
         />
     <LinearLayout
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:layout_below="@+id/contents"
         android:orientation="horizontal">
+<!--         <Button
+            android:id="@+id/add_photos_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_background"
+            android:text="Add photos +"
+            android:textColor="@color/white"
+
+            />
+
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contents"
+        android:orientation="horizontal"> -->
     <Button
         android:id="@+id/add_photos_button"
         android:layout_width="wrap_content"
@@ -109,6 +127,7 @@
         android:textColor="@color/white"
 
         />
+
         <ImageView
             android:id="@+id/imageDetail"
             android:layout_width="130dp"

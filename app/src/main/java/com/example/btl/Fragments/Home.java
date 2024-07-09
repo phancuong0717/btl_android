@@ -36,8 +36,9 @@ public class Home extends Fragment {
     private Map<String, String> userAvatarsMap;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         view = binding.getRoot();
         db = FirebaseFirestore.getInstance();
@@ -55,6 +56,18 @@ public class Home extends Fragment {
         loadPosts();
         return view;
     }
+
+
+    private void getUserName(String userId) {
+        db.collection("Users").document(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                String userName = task.getResult().getString("name");
+                String userAvatar = task.getResult().getString("avatar");
+                userNamesMap.put(userId, userName);
+                userAvatarsMap.put(userId, userAvatar);
+                adapter.updateUserNamesMap(userNamesMap);
+                adapter.updateUserAvatarsMap(userAvatarsMap);
+
 
     private void loadPosts() {
         db.collection("posts")
@@ -82,7 +95,6 @@ public class Home extends Fragment {
                 userAvatarsMap.put(userId, userAvatar);
                 adapter.updateUserNamesMap(userNamesMap);
                 adapter.updateUserAvatarsMap(userAvatarsMap);
-
                 adapter.updatePostList(postList);
             } else {
             }
