@@ -8,7 +8,7 @@
     <item
         android:id="@+id/restaurant"
         android:title="Restaurant"
-        android:icon="@drawable/icon_restaurant"/>
+        android:icon="@drawable/restaurant_icon"/>
 
     <item
         android:id="@+id/add"
