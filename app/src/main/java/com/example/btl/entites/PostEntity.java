@@ -1,6 +1,6 @@
 package com.example.btl.entites;
 
-public class Post {
+public class PostEntity {
     String id;
     String title;
     String content;
@@ -11,7 +11,7 @@ public class Post {
     String updated_at;
     Boolean status;
 
-    public Post(String id, String title, String content, String userId, String restaurant_id, String image, String created_at, String updated_at, Boolean status) {
+    public PostEntity(String id, String title, String content, String userId, String restaurant_id, String image, String created_at, String updated_at, Boolean status) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -23,7 +23,7 @@ public class Post {
         this.status = status;
     }
 
-    public Post() {
+    public PostEntity() {
     }
 
     public String getId() {
