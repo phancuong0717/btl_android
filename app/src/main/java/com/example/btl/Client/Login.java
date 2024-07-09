@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +27,7 @@ public class Login extends AppCompatActivity {
 
     private Button btnLogin;
     private EditText email, password;
+    private TextView  toRegister;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
 
@@ -39,6 +41,7 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.etPassword);
         progressBar = findViewById(R.id.customProgressBar);
         mAuth = FirebaseAuth.getInstance();
+        toRegister = findViewById(R.id.btnToRegister);
         btnLogin= findViewById(R.id.btnLogin);
         String Stremail= getIntent().getStringExtra("email");
         if (Stremail != null) {
@@ -48,6 +51,10 @@ public class Login extends AppCompatActivity {
             String emailStr = email.getText().toString();
             String passwordStr = password.getText().toString();
             sign_in(emailStr, passwordStr);
+        });
+        toRegister.setOnClickListener(v ->{
+            Intent intent = new Intent(Login.this, Resgister.class);
+            startActivity(intent);
         });
     }
 
@@ -66,6 +73,8 @@ public class Login extends AppCompatActivity {
 
                         Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
+                        showLoading(false);
+                        finish();
                     } else {
                         if (task.getException() instanceof FirebaseAuthInvalidUserException|| task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                             showLoading(false);

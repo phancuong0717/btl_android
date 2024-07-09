@@ -74,6 +74,10 @@ public class UpdateUser extends AppCompatActivity {
         binding.btnCancel.setOnClickListener(v -> {
             finish();
         });
+        binding.changePassword.setOnClickListener(v -> {
+            Intent intent = new Intent(UpdateUser.this, ChangePassword.class);
+            startActivity(intent);
+        });
 
     }
 
